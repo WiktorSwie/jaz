@@ -3,6 +3,7 @@ package com.example.jaz_s27293_nbp;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 public class SredniaWaluta {
@@ -11,8 +12,7 @@ public class SredniaWaluta {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
-        private LocalDate godzina_zap;
-
+        private LocalTime godzina_zap;
         private String waluta;
         private LocalDate data_rozpoczynajaca;
         private LocalDate data_koncowa;
@@ -26,11 +26,11 @@ public class SredniaWaluta {
                 this.id = id;
         }
 
-        public LocalDate getGodzina_zap() {
+        public LocalTime getGodzina_zap() {
                 return godzina_zap;
         }
 
-        public void setGodzina_zap(LocalDate godzina_zap) {
+        public void setGodzina_zap(LocalTime godzina_zap) {
                 this.godzina_zap = godzina_zap;
         }
 
