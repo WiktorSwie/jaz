@@ -14,19 +14,35 @@ import java.util.Date;
 @RequestMapping("https://api.nbp.pl/api/")
 public class ApiController {
 
+    private final WalutoweRepository walutoweRepository;
+
+    public ApiController(WalutoweRepository walutoweRepository) {
+        this.walutoweRepository = walutoweRepository;
+    }
+
     @Operation(description = "ten endpoint pozwala na obliczenie sredniej wartości waluty na przedziale dat")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "zwraca informacj,że endpoint zadziałał poprawnie"),
             @ApiResponse(responseCode = "400", description = "zwraca informacje,że podano błędne dane")
     })
-    @GetMapping("/{table}/{code}/{startDate}/{endDate}")
+    @PostMapping("/{table}/{code}/{startDate}/{endDate}")
         public ResponseEntity<Object> obliczwalute(@RequestBody SredniaWaluta waluta) {
         LocalDate endDate = waluta.getData_koncowa();
         LocalDate startDate = waluta.getData_rozpoczynajaca();
         if (endDate.isAfter(startDate)) {
+
             return ResponseEntity.ok(waluta);
         } else {
         return ResponseEntity.badRequest().body(waluta);
         }
+    }
+    @Operation(description = "ten endpoint znajduje sredniawalute po typie waluty")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "zwraca informacje,że endpoint zadziałał poprawnie"),
+    })
+    @GetMapping("/{waluta}")
+    public ResponseEntity<SredniaWaluta> exception(@PathVariable String waluta) {
+        SredniaWaluta sredniaWaluta = walutoweRepository.findBy(waluta);
+        return ResponseEntity.ok(sredniaWaluta);
     }
 }

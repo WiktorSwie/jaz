@@ -1,6 +1,7 @@
 package com.example.jaz_s27293_nbp;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,11 +13,17 @@ public class SredniaWaluta {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
+
+
         private LocalTime godzina_zap;
         private String waluta;
+        @DateTimeFormat(pattern = "year-month-day")
         private LocalDate data_rozpoczynajaca;
+        @DateTimeFormat(pattern = "year-month-day")
         private LocalDate data_koncowa;
+
         private double sredni_kurs;
+        @DateTimeFormat(pattern = "year-month-day")
         private LocalDate data_zapytania;
         public int getId() {
                 return id;
