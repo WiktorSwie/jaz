@@ -29,6 +29,10 @@ public class SredniaWaluta {
                 return id;
         }
 
+        public SredniaWaluta(){
+
+        }
+
         public void setId(int id) {
                 this.id = id;
         }
